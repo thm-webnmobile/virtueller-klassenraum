@@ -1,0 +1,5 @@
+# Don't track content of these folders
+services/node_modules
+chat-app/node_modules
+chat-app/dist
+chat-app/.cache
