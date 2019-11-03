@@ -3,6 +3,7 @@
 An App for Teachers and Students.
 
 ## Installation
+Clone repository
 
 ```bash
 cd chat-app
