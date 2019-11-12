@@ -1,7 +1,6 @@
 import socketIO from "socket.io";
 
 const PORT = 5000;
-
 const io = socketIO(PORT);
 
 io.on("connection", function(socket) {
