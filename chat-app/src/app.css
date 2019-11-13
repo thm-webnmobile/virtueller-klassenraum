@@ -1,0 +1,31 @@
+/* Root */
+:root {
+    --background-color: #FFF;
+    --border-color: rgba(0, 0, 0, 0.15);
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-weight: bold !important;
+}
+
+/* Main */
+main {
+    display: flex !important;
+    flex: 1;
+}
+@media only screen and (max-width: 992px) {
+    main {
+        margin-left: 0;
+    }
+}
+@media only screen and (max-width: 768px) {
+    main {
+        margin-left: 0;
+    }
+}
+
+/* Layout */
+.layout {
+    height: calc(var(--vh, 1vh) * 100);
+    display: flex;
+}
