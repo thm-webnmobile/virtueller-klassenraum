@@ -10,7 +10,7 @@ class App extends Component {
     constructor(props) {
         super(props);
 
-        const socket = socketIOClient("http://192.168.178.44:5000");
+        const socket = socketIOClient("localhost:5000");
 
         this.state = {
             socket: socket,
