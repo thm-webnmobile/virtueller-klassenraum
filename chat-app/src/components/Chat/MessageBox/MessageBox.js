@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button";
 
@@ -8,8 +6,8 @@ const MessageBox = ({ onSendMessage: pushSendMessage }) => {
     const [message, setMessage] = useState("");
 
     return (
-        <Row>
-            <Col sm={10}>
+        <div className="message-form">
+            <div className="message-form-control">
                 <Form.Control 
                     type="text" 
                     placeholder="Message" 
@@ -23,11 +21,13 @@ const MessageBox = ({ onSendMessage: pushSendMessage }) => {
                     }}
                     value={message}
                 />
-            </Col>
-            <Col sm={2}>
-                <Button variant="primary" onClick={evt => pushSendMessage(message)}>Send Message</Button>
-            </Col>
-        </Row>
+            </div>
+            <div className="message-form-buttons">
+                <Button variant="primary" onClick={evt => pushSendMessage(message)}>
+                    <svg className="svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                </Button>
+            </div>
+        </div>
     );
 };
 
