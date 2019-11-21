@@ -1,19 +1,19 @@
+// Imports
 import socketIO from "socket.io";
 
-const PORT = 5000;
-const io = socketIO(PORT);
+// Classes
+const Server = require('./classes/Server');
 
-io.on("connection", function(socket) {
-    console.log("Connection established!");
+// Config
+var config = {
+    "Port": 5000,
+}
 
-    socket.on("newChatMessage", data => {
-        io.emit("newChatMessage", data);
-        console.log("Message received: ", data);
-    });
+// Connection
+const io = socketIO(config["Port"]);
 
-    socket.on("disconnect", function() {
-        console.log("Disconnected!")
-    });
-});
-
-console.log(`Server listening on ${PORT}`);
+// Server
+var server = new Server(io);
+server.createRoom("a");
+server.createRoom("b");
+server.createRoom("c");
