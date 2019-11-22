@@ -59,7 +59,7 @@ class Sidebar extends Component {
                                 <InputGroup className="mb-3">
                                     <FormControl name="room" placeholder="Room ID" />
                                 </InputGroup>
-                                <Button type="submit" variant="block">Enter</Button>
+                                <Button type="submit" variant="block" className="btn-primary">Join</Button>
                             </Form>
                         </div>
                     </div>
