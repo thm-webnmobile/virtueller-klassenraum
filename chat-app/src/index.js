@@ -1,7 +1,6 @@
 import React from "react";
 import { render } from "react-dom";
 
-import Chat from "./components/Chat/Chat";
-import Login from "./components/Login/Login";
+import App from "./App";
 
-render(<Login />, document.getElementById("app"));
+render(<App />, document.getElementById("app"));
