@@ -80,6 +80,12 @@ module.exports = internal.UserConnection = class {
                     case "REMOVE":
                         room.getBoard().removeMessage(json.position);
                         break;
+                    case "UPVOTE":
+                        room.getBoard().upvoteMessage(json.position);
+                        break;
+                    case "DOWNVOTE":
+                        room.getBoard().downvoteMessage(json.position);
+                        break;
                 }
             }
         } catch (error) {

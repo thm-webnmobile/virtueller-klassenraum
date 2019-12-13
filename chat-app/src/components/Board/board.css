@@ -74,3 +74,19 @@
 .board-body li:hover {
     background-color: var(--light);
 }
+
+/* Buttons */
+
+.board-message {
+    display: flex;
+}
+
+.board-message li{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.board-message-buttons {
+    padding: 7px;
+}

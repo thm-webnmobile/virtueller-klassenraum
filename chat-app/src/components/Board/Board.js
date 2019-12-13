@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Form from "react-bootstrap/Form"
+import Button from 'react-bootstrap/Button'
 
 class Board extends Component {
     constructor(props) {
@@ -36,6 +37,20 @@ class Board extends Component {
         }));
     }
 
+    upvoteMessage(message) {
+        this.props.socket.emit("board", JSON.stringify({
+            "type": "UPVOTE",
+            "position": message.position
+        }));
+    }
+
+    downvoteMessage(message) {
+        this.props.socket.emit("board", JSON.stringify({
+            "type": "DOWNVOTE",
+            "position": message.position
+        }));
+    }
+
     render() {
         return (
             <div className={ "board" + (this.props.open ? " open" : "") }>
@@ -52,9 +67,18 @@ class Board extends Component {
                 <div className="board-body">
                     <ul>
                         { this.state.messages.flatMap((message, index) => [
-                            <li key={index} onClick={ () => this.removeMessage(message) }>{ message.messages[0] }</li>
+                            <div class="board-message">
+                                <li>{ message.messages[0] }
+                                <div class="board-message-buttons">
+                                    <Button variant="outline-success" key={index} onClick={ () => this.upvoteMessage(message) }>0</Button>
+                                    <Button variant="outline-danger" key={index} onClick={ () => this.downvoteMessage(message) }>0</Button>
+                                    <Button variant="danger" key={index} onClick={ () => this.removeMessage(message) }>U</Button>
+                                </div>
+                                </li>
+                            </div>
                         ])}
                     </ul>
+                    
                 </div>
                 <div className="board-toggler" onClick={ () => setBoardOpen(!boardOpen) }></div>
             </div>

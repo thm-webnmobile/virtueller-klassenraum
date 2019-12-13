@@ -4,6 +4,10 @@ module.exports = internal.Board = class {
     constructor(room) {
         this.room = room;
         this.messageIndices = [];
+        this.messageRating = {
+            upvotes: [],
+            downvotes: []
+        };
     }
     
     addMessage(position) {
@@ -23,6 +27,33 @@ module.exports = internal.Board = class {
             this.messageIndices.splice(index, 1);
             this.update();
             console.log("remove message");
+        }
+    }
+    upvoteMessage(position) {
+        var index = this.messageIndices.indexOf(position);
+
+        if (index != -1) {
+            this.messageRating.upvotes.push("User1");
+            this.update();
+            console.log(this.messageRating.upvotes);
+        }
+    }
+    downvoteMessage(position) {
+        var index = this.messageIndices.indexOf(position);
+        var voted;
+
+        if (index != -1) {
+            foreach(uuid in this.messageRating.downvotes){
+                //getUuid vom User
+                if (1 == uuid) {
+                    voted = true;
+                }
+            }
+            if (!voted){
+                this.messageRating.downvotes.push("User1");
+            }
+            this.update();
+            console.log(this.messageRating.downvotes);
         }
     }
 
