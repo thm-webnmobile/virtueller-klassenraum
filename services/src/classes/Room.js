@@ -1,3 +1,13 @@
+const MongoClient = require('mongodb').MongoClient;
+const assert = require('assert');
+ 
+// Connection URL
+const url = 'mongodb://localhost:27017';
+ 
+// Database Name
+const dbName = 'myproject';
+
+
 const Board = require('./Board');
 
 const internal = {};
@@ -69,6 +79,28 @@ module.exports = internal.Room = class {
         this.messages.push(packet); // Put message into room history
 
         this.notify("chat", packet);
+
+        MongoClient.connect(url, function(err, client) {
+            assert.equal(null, err);
+            console.log("Connected successfully to server");
+            const db = client.db(dbName);
+            const collection = db.collection('documents');
+            var myobj = { user: user.getName(), message: message };
+            collection.insertOne(myobj, function(err, res) {
+                if (err) throw err;
+                console.log("Message inserted");
+            });
+            //collection.drop(function(err, delOK) {
+            //    if (err) throw err;
+            //    if (delOK) console.log("Collection deleted");
+            //})
+            collection.find({}).toArray(function(err, result) {
+                if (err) throw err;
+                console.log(result);
+                client.close();
+            });
+          });
+
     }
     // Send a part of the last chatted messages. This will reset the complete chat screen
     sendChatHistory(user) {
