@@ -61,4 +61,5 @@ module.exports = internal.Board = class {
             "messages": messages
         });
     }
+
 }
