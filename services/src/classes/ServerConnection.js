@@ -1,3 +1,5 @@
+const db = require('../Database');
+
 const internal = {};
 
 module.exports = internal.Server = class {
@@ -14,6 +16,12 @@ module.exports = internal.Server = class {
 
     handleHandshake(socket, server) {
         var address = socket.handshake.address;
+        
+        //var collection = db.get().collection('documents');
+        //collection.find().toArray(function(err, docs) {
+        //    console.log("Found the following records");
+        //    console.log(docs);
+        //});
 
         var handshake = function() {
             console.log("Handshake [" + address + "]: " + "Client can now login");
@@ -21,7 +29,8 @@ module.exports = internal.Server = class {
             socket.removeAllListeners();
             socket.on("handshake", handshake);
             socket.on("login", function(data) {
-                // Player tries to reconnect
+                console.log(data);
+                // User tries to reconnect
                 if (data == undefined) {
                     console.log("Handshake [" + address + "]: " + "Client is reconnecting...");
 
@@ -36,7 +45,7 @@ module.exports = internal.Server = class {
                 } else {
                     console.log("Handshake [" + address + "]: " + "Client is connecting...");
 
-                    // Player tries to login
+                    // User tries to login
                     var request = JSON.parse(data);
 
                     try {

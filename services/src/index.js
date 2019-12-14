@@ -1,6 +1,8 @@
 // Imports
 import socketIO from "socket.io";
 
+var db = require('./Database')
+
 // Classes
 const Server = require('./classes/Server');
 
@@ -8,6 +10,16 @@ const Server = require('./classes/Server');
 var config = {
     "Port": 5000,
 }
+
+// Connect to Database
+db.connect('mongodb://localhost:27017', function(err) {
+    if (err) {
+        console.log('Unable to connect to Mongo.')
+        process.exit(1)
+    } else {
+        console.log("Connected successfully to database");
+    };
+});
 
 // Connection
 const io = socketIO(config["Port"]);
