@@ -16,12 +16,6 @@ module.exports = internal.Server = class {
 
     handleHandshake(socket, server) {
         var address = socket.handshake.address;
-        
-        //var collection = db.get().collection('documents');
-        //collection.find().toArray(function(err, docs) {
-        //    console.log("Found the following records");
-        //    console.log(docs);
-        //});
 
         var handshake = function() {
             console.log("Handshake [" + address + "]: " + "Client can now login");
@@ -67,6 +61,26 @@ module.exports = internal.Server = class {
                             } else {
                                 socket.emit("login", JSON.stringify({"state": "INVALID_ROOM_UUID" })); // Room does not exists
                             }
+
+                            // TODO user needs unique uuid 
+                            var collection = db.get().collection('user');
+                            var query = { uuid: user.getUuid() };
+
+                            collection.find(query).toArray(function(err, result) {     // Seatch for User in Database
+                                if (err) throw err;
+
+                                console.log(result);
+
+                                if (result[0].uuid == user.getUuid()) {
+                                    console.log("User found");  // User already exists in database
+                                } else {
+                                    var newUser = { name: user.getName(), uuid: user.getUuid() }; // Add User to database
+                                    collection.insertOne(newUser, function(err, res) {
+                                        if (err) throw err;
+                                        console.log("User added to Database");
+                                    });
+                                }
+                            })
                         }
                     } catch(error) {
                         console.log(error);
